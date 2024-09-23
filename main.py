@@ -13,8 +13,8 @@ for i in range(len(firing_samples)):
         action_trains[i][sample] = 1
 
         for j in range(len(action_potentials[i])):
-            action_potential_trains[i + j] = action_potentials[j]
+            action_potential_trains[i][sample + j] = action_potentials[i][j]
 
 
-plt.plot(range(200000), action_potential_trains)
+plt.plot(range(200000), action_potential_trains[0])
 plt.show()
