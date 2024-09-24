@@ -30,15 +30,21 @@ for k in range(8):
 #print(firing_samples.shape)
 
 #Plottningar
+
+plt.xlabel("Time (s)")
+plt.ylabel("A.U")
 plt.plot(np.linspace(0, 20, 200000, dtype=float), action_potential_trains[2], linewidth=0.5)
 
 plt.show()
 
-
+plt.xlabel("Time (s)")
+plt.ylabel("A.U")
 plt.plot(np.linspace(0, 20, 200000, dtype=float), action_potential_trains[2], linewidth=0.5)
 plt.xlim(10, 10.5)
 plt.show()
 
+plt.xlabel("Time (s)")
+plt.ylabel("A.U")
 plt.plot(np.linspace(0, 20, 200000, dtype=float), list(map(sum, action_potential_trains.T)))
 plt.xlim(10, 10.5)
 plt.show()
