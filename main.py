@@ -30,22 +30,54 @@ for k in range(8):
 #print(firing_samples.shape)
 
 #Plottningar
+'''
+figure, axis = plt.subplots(2, 2)
 
-plt.xlabel("Time (s)")
-plt.ylabel("A.U")
-plt.plot(np.linspace(0, 20, 200000, dtype=float), action_potential_trains[2], linewidth=0.5)
+axis[0, 0].set_xlabel("Time (s)")
+axis[0, 0].set_ylabel("A.U")
+axis[0, 0].plot(np.linspace(0, 20, 200000, dtype=float), action_potential_trains[2], linewidth=0.5)
+
+axis[0, 1].set_xlabel("Time (s)")
+axis[0, 1].set_ylabel("A.U")
+axis[0, 1].plot(np.linspace(0, 20, 200000, dtype=float), action_potential_trains[2], linewidth=0.5)
+axis[0, 1].set_xlim(10, 10.5)
+
+axis[1, 0].set_xlabel("Time (s)")
+axis[1, 0].set_ylabel("A.U")
+axis[1, 0].plot(np.linspace(0, 20, 200000, dtype=float), list(map(sum, action_potential_trains.T)))
+axis[1, 0].set_xlim(10, 10.5)
 
 plt.show()
+'''
+### Q2
+# a)
+hanning_window = np.hanning(10000)
+filtered_action_trains = [np.convolve(hanning_window, action_train) for action_train in action_trains]
 
-plt.xlabel("Time (s)")
-plt.ylabel("A.U")
-plt.plot(np.linspace(0, 20, 200000, dtype=float), action_potential_trains[2], linewidth=0.5)
-plt.xlim(10, 10.5)
+figure, axis = plt.subplots(2, 2)
+
+# c)
+for i, f in enumerate(filtered_action_trains):
+    axis[0, 0].plot(np.linspace(-0.5, 20.5, 200000 + 10000 - 1, dtype=float), f, label=f'{i+1}')
+
+axis[0, 0].set_xlabel("Time (s)")
+axis[0, 0].set_ylabel("A.U")
+axis[0, 0].legend(ncol=4)
+
+# d)
+axis[1, 0].set_title("Unit 4")
+axis[1, 0].set_xlabel("Time (s)")
+axis[1, 0].set_ylabel("A.U")
+axis[1, 0].plot(np.linspace(0, 20, 200000), action_trains[3], linewidth='0.5')
+axis[1, 0].plot(np.linspace(-0.5, 20.5, 209999), filtered_action_trains[3])
+
+
+# e)
+axis[1, 1].set_title("Unit 7")
+axis[1, 1].set_xlabel("Time (s)")
+axis[1, 1].set_ylabel("A.U")
+axis[1, 1].plot(np.linspace(0, 20, 200000), action_trains[6], linewidth='0.5')
+axis[1, 1].plot(np.linspace(-0.5, 20.5, 209999), filtered_action_trains[6])
+axis[1, 1].set_ylim(axis[1, 0].get_ylim())
+figure.tight_layout()
 plt.show()
-
-plt.xlabel("Time (s)")
-plt.ylabel("A.U")
-plt.plot(np.linspace(0, 20, 200000, dtype=float), list(map(sum, action_potential_trains.T)))
-plt.xlim(10, 10.5)
-plt.show()
-
