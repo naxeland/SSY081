@@ -32,27 +32,25 @@ for i in range(len(firing_samples)):
 
 #Plottningar
 
-figure, axis = plt.subplots(2, 2)
-figure.suptitle("Q1")
+plt.plot(np.linspace(0, 20, 200000, dtype=float), action_potential_trains[2], linewidth=0.5)
+plt.title("Q1 d) Action potential train 3")
+plt.xlabel("Time (s)")
+plt.ylabel("A.U")
 
-axis[0, 0].set_title("d) Action potential train 3")
-axis[0, 0].set_xlabel("Time (s)")
-axis[0, 0].set_ylabel("A.U")
-axis[0, 0].plot(np.linspace(0, 20, 200000, dtype=float), action_potential_trains[2], linewidth=0.5)
+plt.figure()
+plt.plot(np.linspace(0, 20, 200000, dtype=float), action_potential_trains[2], linewidth=0.5)
+plt.title("Q1 d) Action potential train 3 (10-10.5s)")
+plt.xlabel("Time (s)")
+plt.ylabel("A.U")
+plt.xlim(10, 10.5)
 
-axis[0, 1].set_title("d) Action potential train 3 (10-10.5s)")
-axis[0, 1].set_xlabel("Time (s)")
-axis[0, 1].set_ylabel("A.U")
-axis[0, 1].plot(np.linspace(0, 20, 200000, dtype=float), action_potential_trains[2], linewidth=0.5)
-axis[0, 1].set_xlim(10, 10.5)
+plt.figure()
+plt.plot(np.linspace(0, 20, 200000, dtype=float), list(map(sum, action_potential_trains.T)))
+plt.xlim(10, 10.5)
+plt.title("Q1 f) Sum of all action potential trains (10-10.5)")
+plt.xlabel("Time (s)")
+plt.ylabel("A.U")
 
-axis[1, 0].set_title("f) Sum of all action potential trains (10-10.5)")
-axis[1, 0].set_xlabel("Time (s)")
-axis[1, 0].set_ylabel("A.U")
-axis[1, 0].plot(np.linspace(0, 20, 200000, dtype=float), list(map(sum, action_potential_trains.T)))
-axis[1, 0].set_xlim(10, 10.5)
-
-figure.tight_layout()
 
 
 ### Q2
@@ -60,35 +58,35 @@ figure.tight_layout()
 hanning_window = np.hanning(10000)
 filtered_action_trains = [np.convolve(hanning_window, action_train) for action_train in action_trains]
 
-figure, axis = plt.subplots(2, 2)
-figure.suptitle("Q2")
+
 
 # c)
+plt.figure()
 for i, f in enumerate(filtered_action_trains):
-    axis[0, 0].plot(np.linspace(-0.5, 20.5, 200000 + 10000 - 1, dtype=float), f, label=f'{i+1}')
+    plt.plot(np.linspace(-0.5, 20.5, 200000 + 10000 - 1, dtype=float), f, label=f'{i+1}')
 
-axis[0, 0].set_title("c) Filtered signals of all action trains")
-axis[0, 0].set_xlabel("Time (s)")
-axis[0, 0].set_ylabel("A.U")
-axis[0, 0].legend(ncol=4)
+plt.title("Q2 c) Filtered signals of all action trains")
+plt.xlabel("Time (s)")
+plt.ylabel("A.U")
+plt.legend(ncol=4)
 
 # d)
-axis[1, 0].set_title("d) Unit 4: Action train and filtered action train")
-axis[1, 0].set_xlabel("Time (s)")
-axis[1, 0].set_ylabel("A.U")
-axis[1, 0].plot(np.linspace(0, 20, 200000), action_trains[3], linewidth='0.5')
-axis[1, 0].plot(np.linspace(-0.5, 20.5, 209999), filtered_action_trains[3])
+plt.figure()
+plt.title("Q2 d) Unit 4: Action train and filtered action train")
+plt.xlabel("Time (s)")
+plt.ylabel("A.U")
+plt.plot(np.linspace(0, 20, 200000), action_trains[3], linewidth='0.5')
+plt.plot(np.linspace(-0.5, 20.5, 209999), filtered_action_trains[3])
 
 
 # e)
-axis[1, 1].set_title("e) Unit 7: Action train and filtered action train")
-axis[1, 1].set_xlabel("Time (s)")
-axis[1, 1].set_ylabel("A.U")
-axis[1, 1].plot(np.linspace(0, 20, 200000), action_trains[6], linewidth='0.5')
-axis[1, 1].plot(np.linspace(-0.5, 20.5, 209999), filtered_action_trains[6])
-axis[1, 1].set_ylim(axis[1, 0].get_ylim())
+plt.figure()
+plt.title("Q2 e) Unit 7: Action train and filtered action train")
+plt.xlabel("Time (s)")
+plt.ylabel("A.U")
+plt.plot(np.linspace(0, 20, 200000), action_trains[6], linewidth='0.5')
+plt.plot(np.linspace(-0.5, 20.5, 209999), filtered_action_trains[6])
 
-figure.tight_layout()
 plt.show()
 
 
