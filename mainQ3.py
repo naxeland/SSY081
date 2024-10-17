@@ -9,6 +9,7 @@ f = np.load('data_files/f.npy', allow_pickle=True)
 fft_values = fft.rfft(f[0])#/x.size
 interf = fft_values.copy()
 interf[50] += 0.15 * 1024 / 2
+
 # a)
 plt.title("Q3 a) Signal comparison")
 plt.plot(fft.irfft(interf), 'r', linewidth=0.5, label = 'With interference')
@@ -17,6 +18,7 @@ plt.xlabel("Time(s)")
 plt.ylabel("A.U")
 plt.legend(ncol=4)
 
+# c)
 plt.figure()
 plt.title("Q3 c) Absolute value of DFT")
 plt.plot(np.abs(interf)    , 'r' , linewidth=0.5, label = 'With interference')

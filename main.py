@@ -19,19 +19,11 @@ for i in range(len(firing_samples)):
             action_potential_trains[i][sample + j] = action_potentials[i][j]
 
 
-#for k in range(8):
-#    print(sum(action_trains[k]))
-
-#Prints för att kolla data:
-   
-#print(np.size(firing_samples[0]))    
-#print(sum(action_trains[0]))
-#print(firing_samples)
-#print(action_potentials)
-#print(firing_samples.shape)
-
 #Plottningar
 
+### Q1
+
+# d)
 plt.plot(np.linspace(0, 20, 200000, dtype=float), action_potential_trains[2], linewidth=0.5)
 plt.title("Q1 d) Action potential train 3")
 plt.xlabel("Time (s)")
@@ -44,6 +36,7 @@ plt.xlabel("Time (s)")
 plt.ylabel("A.U")
 plt.xlim(10, 10.5)
 
+# f)
 plt.figure()
 plt.plot(np.linspace(0, 20, 200000, dtype=float), list(map(sum, action_potential_trains.T)))
 plt.xlim(10, 10.5)
@@ -52,13 +45,11 @@ plt.xlabel("Time (s)")
 plt.ylabel("A.U")
 
 
-
 ### Q2
+
 # a)
 hanning_window = np.hanning(10000)
 filtered_action_trains = [np.convolve(hanning_window, action_train) for action_train in action_trains]
-
-
 
 # c)
 plt.figure()
@@ -78,7 +69,6 @@ plt.ylabel("A.U")
 plt.plot(np.linspace(0, 20, 200000), action_trains[3], linewidth='0.5')
 plt.plot(np.linspace(-0.5, 20.5, 209999), filtered_action_trains[3])
 
-
 # e)
 plt.figure()
 plt.title("Q2 e) Unit 7: Action train and filtered action train")
@@ -88,5 +78,3 @@ plt.plot(np.linspace(0, 20, 200000), action_trains[6], linewidth='0.5')
 plt.plot(np.linspace(-0.5, 20.5, 209999), filtered_action_trains[6])
 
 plt.show()
-
-
