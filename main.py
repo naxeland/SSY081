@@ -7,17 +7,24 @@ action_potentials = np.load('data_files/action_potentials.npy', allow_pickle=Tru
 firing_samples = np.load('data_files/firing_samples.npy', allow_pickle=True).T
 
 action_trains = np.zeros((8, 200000), dtype=int)
-action_potential_trains = np.zeros((8, 200000), dtype=float)
+action_potential_trains = np.zeros((8, 200099), dtype=float)
 sample_counts = np.zeros((8), dtype=int)
 
+
+
+#for i in range(8):
+ #   action_trains = np.convolve(action_potentials[i], firing_samples[i], mode='full')
 for i in range(len(firing_samples)):
     for sample in firing_samples[i]:
         action_trains[i][sample] = 1
-        sample_counts[i] += 1
+        #sample_counts[i] += 1
 
-        for j in range(len(action_potentials[i])):
-            action_potential_trains[i][sample + j] = action_potentials[i][j]
+        #for j in range(len(action_potentials[i])):
+            #action_potential_trains[i][sample + j] = action_potentials[i][j]
 
+for i in range(8):
+    action_potential_trains[i] = np.convolve(action_potentials[i], action_trains[i])
+    sample_counts[i] = len(action_potentials[i])
 
 #for k in range(8):
 #    print(sum(action_trains[k]))
@@ -32,24 +39,25 @@ for i in range(len(firing_samples)):
 
 #Plottningar
 
+
 figure, axis = plt.subplots(2, 2)
 figure.suptitle("Q1")
 
 axis[0, 0].set_title("d) Action potential train 3")
 axis[0, 0].set_xlabel("Time (s)")
 axis[0, 0].set_ylabel("A.U")
-axis[0, 0].plot(np.linspace(0, 20, 200000, dtype=float), action_potential_trains[2], linewidth=0.5)
+axis[0, 0].plot(np.linspace(0, 20, 200099, dtype=float), action_potential_trains[2], linewidth=0.5)
 
 axis[0, 1].set_title("d) Action potential train 3 (10-10.5s)")
 axis[0, 1].set_xlabel("Time (s)")
 axis[0, 1].set_ylabel("A.U")
-axis[0, 1].plot(np.linspace(0, 20, 200000, dtype=float), action_potential_trains[2], linewidth=0.5)
+axis[0, 1].plot(np.linspace(0, 20, 200099, dtype=float), action_potential_trains[2], linewidth=0.5)
 axis[0, 1].set_xlim(10, 10.5)
 
 axis[1, 0].set_title("f) Sum of all action potential trains (10-10.5)")
 axis[1, 0].set_xlabel("Time (s)")
 axis[1, 0].set_ylabel("A.U")
-axis[1, 0].plot(np.linspace(0, 20, 200000, dtype=float), list(map(sum, action_potential_trains.T)))
+axis[1, 0].plot(np.linspace(0, 20, 200099, dtype=float), list(map(sum, action_potential_trains.T)))
 axis[1, 0].set_xlim(10, 10.5)
 
 figure.tight_layout()

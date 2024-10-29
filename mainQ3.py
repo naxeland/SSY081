@@ -28,7 +28,7 @@ interf[50] += 0.15 * 1024 / 2
 
 axis[1].plot(np.abs(interf)    , 'r' , linewidth=0.5, label = 'With interference')
 axis[1].plot(np.abs(fft_values), 'b' , linewidth=0.5, label = 'Without interference')
-axis[1].set_xlabel("Hz")
+axis[1].set_xlabel("Frequency(Hz)")
 axis[1].set_ylabel("A.U")
 axis[1].legend(ncol=4)
 
